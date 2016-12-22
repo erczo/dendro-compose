@@ -25,7 +25,7 @@ services:
       - MONGO_DB_USER
       - MONGO_DB_PASS
     volumes:
-      - "${MONGO_PRIMARY_DATA}:/data/db"
+      - "${MONGO_PRIMARY_DB_PATH}:/data/db"
   web-api-1:
     depends_on:
       - mongo-primary
