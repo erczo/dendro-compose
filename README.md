@@ -1,6 +1,6 @@
 # Dendro Compose
 
-Docker Compose files for installing and running the Dendro software stack.
+Docker Compose files for installing and running the Dendro software stack. Does not support scaling or MongoDB replica sets.
 
 TODO: Briefly describe this repo and Project Dendro
 
