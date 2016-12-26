@@ -25,6 +25,12 @@ services:
       - MONGO_DB_PASS
     volumes:
       - "${MONGO_DB_VOLUME}"
+  migrations:
+    depends_on:
+      - mongo
+    image: "dendro/dendro-migrations"
+    environment:
+      - MONGO_URL=mongodb://${MONGO_DB_USER}:${MONGO_DB_PASS}@mongo:27017/${MONGO_DB_NAME}
   web-api-1:
     depends_on:
       - mongo
