@@ -4,6 +4,7 @@ services:
   nginx:
     build: ./nginx
     depends_on:
+      - noaa-api-0
       - web-api-1
       - web-api-2
       - web-dash-1
@@ -31,6 +32,8 @@ services:
     image: "dendro/dendro-migrations"
     environment:
       - MONGO_URL=mongodb://${MONGO_DB_USER}:${MONGO_DB_PASS}@mongo:27017/${MONGO_DB_NAME}
+  noaa-api-0:
+    image: "dendro/dendro-noaa-api"
   web-api-1:
     depends_on:
       - mongo
@@ -38,6 +41,7 @@ services:
     environment:
       - LEGACY_MYSQL_URL
       - MONGO_URL=mongodb://${MONGO_DB_USER}:${MONGO_DB_PASS}@mongo:27017/${MONGO_DB_NAME}
+      - NOAA_API_URL=http://noaa-api-0:8080
   web-api-2:
     depends_on:
       - mongo
@@ -45,6 +49,7 @@ services:
     environment:
       - LEGACY_MYSQL_URL
       - MONGO_URL=mongodb://${MONGO_DB_USER}:${MONGO_DB_PASS}@mongo:27017/${MONGO_DB_NAME}
+      - NOAA_API_URL=http://noaa-api-0:8080
   web-dash-1:
     image: "dendro/dendro-web-dash"
   web-dash-2:
