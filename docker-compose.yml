@@ -5,6 +5,7 @@ services:
     build: ./nginx
     depends_on:
       - noaa-api-0
+      - noaa-goes-api-1
       - web-api-1
       - web-api-2
       - web-dash-1
@@ -34,6 +35,11 @@ services:
       - MONGO_URL=mongodb://${MONGO_DB_USER}:${MONGO_DB_PASS}@mongo:27017/${MONGO_DB_NAME}
   noaa-api-0:
     image: "dendro/dendro-noaa-api"
+  noaa-goes-api-1:
+    image: "dendro/dendra-noaa-goes-api"
+    environment:
+      - NOAA_GOES_DDS_USER
+      - NOAA_GOES_DDS_PASS
   web-api-1:
     depends_on:
       - mongo
