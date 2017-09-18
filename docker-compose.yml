@@ -40,6 +40,10 @@ services:
     environment:
       - NOAA_GOES_DDS_USER
       - NOAA_GOES_DDS_PASS
+  json-archive-api-1:
+    image: "dendro/dendra-json-archive-api"
+    volumes:
+      - "${JSON_ARCHIVE_VOLUME}"
   web-api-1:
     depends_on:
       - mongo
