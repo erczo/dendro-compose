@@ -1,0 +1,52 @@
+{
+  "connections": {
+    "jsonArchive": {
+      "url": "JSON_ARCHIVE_API_URL"
+    },
+    "noaaGOES": {
+      "url": "NOAA_GOES_API_URL"
+    }
+  },
+  "databases": {
+    "nedb": {
+      "cache": {
+        "paginate": {
+          "default": 20,
+          "max": 2000
+        },
+        "path": "/home/node/cache"
+      },
+      "state": {
+        "paginate": {
+          "default": 20,
+          "max": 2000
+        },
+        "path": "/home/node/state"
+      }
+    }
+  },
+  "port": 8080,
+  "tasks": {
+    "cache_grooming": null,
+    "worker": {
+      "taskMachines": {
+        "archivePastPrimary": {
+          "afterSeconds": 180,
+          "module": "@dendra-science/worker-tasks-goes",
+          "member": "archivePast"
+        },
+        "archivePastSecondary": {
+          "afterSeconds": 3600,
+          "module": "@dendra-science/worker-tasks-goes",
+          "member": "archivePast"
+        },
+        "archiveRecent": {
+          "afterSeconds": 120,
+          "module": "@dendra-science/worker-tasks-goes",
+          "member": "archiveRecent"
+        }
+      },
+      "timerSeconds": [20, 40]
+    }
+  }
+}

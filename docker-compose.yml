@@ -44,6 +44,14 @@ services:
     image: "dendro/dendra-json-archive-api"
     volumes:
       - "${JSON_ARCHIVE_VOLUME}"
+  goes-worker:
+    build: ./goes-worker
+    depends_on:
+      - json-archive-api-1
+      - noaa-goes-api-1
+    environment:
+      - JSON_ARCHIVE_API_URL=http://json-archive-api-1:8080
+      - NOAA_GOES_API_URL=http://noaa-goes-api-1:8080
   web-api-1:
     depends_on:
       - mongo
