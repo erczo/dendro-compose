@@ -33,17 +33,29 @@
         "archivePastPrimary": {
           "afterSeconds": 180,
           "module": "@dendra-science/worker-tasks-goes",
-          "member": "archivePast"
+          "member": "archivePast",
+          "options": {
+            "interval": 400,
+            "maxExecutions": 5000
+          }
         },
         "archivePastSecondary": {
           "afterSeconds": 3600,
           "module": "@dendra-science/worker-tasks-goes",
-          "member": "archivePast"
+          "member": "archivePast",
+          "options": {
+            "interval": 800,
+            "maxExecutions": 5000
+          }
         },
         "archiveRecent": {
           "afterSeconds": 120,
           "module": "@dendra-science/worker-tasks-goes",
-          "member": "archiveRecent"
+          "member": "archiveRecent",
+          "options": {
+            "interval": 400,
+            "maxExecutions": 2500
+          }
         }
       },
       "timerSeconds": [20, 40]
