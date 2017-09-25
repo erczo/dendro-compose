@@ -1,4 +1,9 @@
 {
+  "apis": {
+    "influxDB": {
+      "url": "INFLUXDB_API_URL"
+    }
+  },
   "connections": {
     "jsonArchive": {
       "url": "JSON_ARCHIVE_API_URL"
@@ -30,28 +35,28 @@
     "cache_grooming": null,
     "worker": {
       "taskMachines": {
-        "archivePastPrimary": {
+        "archiveAndLoadPastPrimary": {
           "afterSeconds": 180,
           "module": "@dendra-science/worker-tasks-goes",
-          "member": "archivePast",
+          "member": "archiveAndLoadPast",
           "options": {
             "interval": 400,
             "maxExecutions": 5000
           }
         },
-        "archivePastSecondary": {
+        "archiveAndLoadPastSecondary": {
           "afterSeconds": 3600,
           "module": "@dendra-science/worker-tasks-goes",
-          "member": "archivePast",
+          "member": "archiveAndLoadPast",
           "options": {
             "interval": 800,
             "maxExecutions": 5000
           }
         },
-        "archiveRecent": {
+        "archiveAndLoadRecent": {
           "afterSeconds": 120,
           "module": "@dendra-science/worker-tasks-goes",
-          "member": "archiveRecent",
+          "member": "archiveAndLoadRecent",
           "options": {
             "interval": 400,
             "maxExecutions": 2500

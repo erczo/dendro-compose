@@ -12,6 +12,13 @@ services:
       - web-dash-2
     ports:
       - "${WEB_PORT}:80"
+  influxdb:
+    build: ./influxdb
+    image: "dendro:influxdb"
+    ports:
+      - "${INFLUXDB_PORT}:8086"
+    volumes:
+      - "${INFLUXDB_VOLUME}"
   mongo:
     build: ./mongo
     image: "dendro:mongo"
@@ -46,10 +53,12 @@ services:
       - "${JSON_ARCHIVE_VOLUME}"
   goes-worker:
     build: ./goes-worker
+    image: "dendro:goes-worker"
     depends_on:
       - json-archive-api-1
       - noaa-goes-api-1
     environment:
+      - INFLUXDB_API_URL=http://influxdb:${INFLUXDB_PORT}
       - JSON_ARCHIVE_API_URL=http://json-archive-api-1:8080
       - NOAA_GOES_API_URL=http://noaa-goes-api-1:8080
   web-api-1:
