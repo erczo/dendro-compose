@@ -64,18 +64,24 @@ services:
   web-api-1:
     depends_on:
       - mongo
-    image: "dendro/dendro-web-api"
+    image: "dendro/dendra-web-api"
     environment:
+      - INFLUXDB_API_URL=http://influxdb:${INFLUXDB_PORT}
       - LEGACY_MYSQL_URL
       - MONGO_URL=mongodb://${MONGO_DB_USER}:${MONGO_DB_PASS}@mongo:27017/${MONGO_DB_NAME}
+      - NOAA_GOES_API_URL=http://noaa-goes-api-1:8080
+      - NOAA_NWS_API_URL=http://noaa-api-0:8080
       - NOAA_API_URL=http://noaa-api-0:8080
   web-api-2:
     depends_on:
       - mongo
-    image: "dendro/dendro-web-api"
+    image: "dendro/dendra-web-api"
     environment:
+      - INFLUXDB_API_URL=http://influxdb:${INFLUXDB_PORT}
       - LEGACY_MYSQL_URL
       - MONGO_URL=mongodb://${MONGO_DB_USER}:${MONGO_DB_PASS}@mongo:27017/${MONGO_DB_NAME}
+      - NOAA_GOES_API_URL=http://noaa-goes-api-1:8080
+      - NOAA_NWS_API_URL=http://noaa-api-0:8080
       - NOAA_API_URL=http://noaa-api-0:8080
   web-dash-1:
     image: "dendro/dendro-web-dash"
