@@ -72,6 +72,7 @@ services:
       - NOAA_GOES_API_URL=http://noaa-goes-api-1:8080
       - NOAA_NWS_API_URL=http://noaa-api-0:8080
       - NOAA_API_URL=http://noaa-api-0:8080
+      - WEB_API_SECRET
   web-api-2:
     depends_on:
       - mongo
@@ -83,6 +84,7 @@ services:
       - NOAA_GOES_API_URL=http://noaa-goes-api-1:8080
       - NOAA_NWS_API_URL=http://noaa-api-0:8080
       - NOAA_API_URL=http://noaa-api-0:8080
+      - WEB_API_SECRET
   web-dash-1:
     image: "dendro/dendro-web-dash"
   web-dash-2:
