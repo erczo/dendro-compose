@@ -26,7 +26,7 @@
           "default": 20,
           "max": 2000
         },
-        "path": "/home/node/state"
+        "path": "/data/state"
       }
     }
   },
