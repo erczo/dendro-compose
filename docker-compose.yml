@@ -37,7 +37,7 @@ services:
   migrations:
     depends_on:
       - mongo
-    image: "dendro/dendro-migrations"
+    image: "dendro/dendra-mongo-migrations"
     environment:
       - MONGO_URL=mongodb://${MONGO_DB_USER}:${MONGO_DB_PASS}@mongo:27017/${MONGO_DB_NAME}
   noaa-api-0:
@@ -89,5 +89,11 @@ services:
       - WEB_API_SECRET
   web-dash-1:
     image: "dendro/dendro-web-dash"
+    environment:
+      - WEB_DASH_API_PATH
+      - WEB_DASH_API_URI
   web-dash-2:
     image: "dendro/dendro-web-dash"
+    environment:
+      - WEB_DASH_API_PATH
+      - WEB_DASH_API_URI
