@@ -1,0 +1,63 @@
+{
+  "apis": {
+    "influxDB": {
+      "url": "INFLUXDB_API_URL"
+    }
+  },
+  "clients": {
+    "ldmp": {
+      "host": "CSI_LDMP_HOST",
+      "port": "CSI_LDMP_PORT"
+    }
+  },
+  "connections": {
+    "jsonArchive": {
+      "url": "JSON_ARCHIVE_API_URL"
+    }
+  },
+  "databases": {
+    "nedb": {
+      "cache": {
+        "paginate": {
+          "default": 20,
+          "max": 2000
+        },
+        "path": "/home/node/cache"
+      },
+      "state": {
+        "paginate": {
+          "default": 20,
+          "max": 2000
+        },
+        "path": "/data/state"
+      }
+    }
+  },
+  "port": 8080,
+  "tasks": {
+    "cache_grooming": null,
+    "worker": {
+      "taskMachines": {
+        "archiveRecords": {
+          "afterSeconds": 90,
+          "module": "@dendra-science/worker-tasks-csi",
+          "member": "archiveRecords",
+          "options": {
+            "interval": 400,
+            "maxExecutions": 50
+          }
+        },
+        "loadRecords": {
+          "afterSeconds": 60,
+          "module": "@dendra-science/worker-tasks-csi",
+          "member": "loadRecords",
+          "options": {
+            "interval": 400,
+            "maxExecutions": 50
+          }
+        }
+      },
+      "timerSeconds": [20, 40]
+    }
+  }
+}

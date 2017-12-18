@@ -51,10 +51,24 @@ services:
     image: "dendro/dendra-json-archive-api"
     volumes:
       - "${JSON_ARCHIVE_VOLUME}"
+  csi-worker:
+    build: ./csi-worker
+    image: "dendro:csi-worker"
+    depends_on:
+      - influxdb
+      - json-archive-api-1
+    environment:
+      - CSI_LDMP_HOST
+      - CSI_LDMP_PORT
+      - INFLUXDB_API_URL=http://influxdb:${INFLUXDB_PORT}
+      - JSON_ARCHIVE_API_URL=http://json-archive-api-1:8080
+    volumes:
+      - "${CSI_WORKER_VOLUME}"
   goes-worker:
     build: ./goes-worker
     image: "dendro:goes-worker"
     depends_on:
+      - influxdb
       - json-archive-api-1
       - noaa-goes-api-1
     environment:
